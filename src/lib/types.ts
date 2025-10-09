@@ -1,6 +1,8 @@
 export interface Location {
 	lat: number;
 	lng: number;
+	name?: string;
+	address?: string;
 }
 
 export interface MapPickerProps {
@@ -13,6 +15,7 @@ export interface MapPickerProps {
 	showCoordinates?: boolean;
 	enableSearch?: boolean;
 	showEmbedCode?: boolean;
+	showLocationInfo?: boolean;
 }
 
 export interface MapInstance {

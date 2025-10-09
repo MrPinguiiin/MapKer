@@ -10,7 +10,6 @@ export class MapManager {
 		zoom: number,
 		enableSearch: boolean
 	): Promise<MapInstance> {
-		// Dynamic imports to avoid SSR issues
 		const leaflet = await import('leaflet');
 		const geosearch = await import('leaflet-geosearch');
 		await import('leaflet/dist/leaflet.css');
@@ -20,19 +19,17 @@ export class MapManager {
 		const OpenStreetMapProvider = geosearch.OpenStreetMapProvider;
 		const GeoSearchControl = geosearch.GeoSearchControl;
 
-		// Fix for default markers in Leaflet with bundlers
 		this.fixLeafletIcons(L);
 
-		// Initialize map
 		const map = L.map(container).setView(center, zoom);
 
-		// Add OpenStreetMap tiles
-		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-			attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-			maxZoom: 19,
+		// Add Google Maps style tiles
+		L.tileLayer('https://{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+			attribution: '© <a href="https://www.google.com/maps">Google Maps</a>',
+			subdomains: ['mt0', 'mt1', 'mt2', 'mt3'],
+			maxZoom: 20,
 		}).addTo(map);
 
-		// Add search control if enabled
 		if (enableSearch) {
 			const provider = new OpenStreetMapProvider();
 			const searchControl = GeoSearchControl({
@@ -63,6 +60,13 @@ export class MapManager {
 			iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
 			shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
 		});
+		
+		L.Icon.Default.mergeOptions({
+			iconSize: [25, 41],
+			iconAnchor: [12, 41],
+			popupAnchor: [1, -34],
+			shadowSize: [41, 41]
+		});
 	}
 
 	addClickHandler(callback: (location: Location) => void): void {
@@ -80,12 +84,10 @@ export class MapManager {
 
 		const { map, marker, L } = this.mapInstance;
 
-		// Remove existing marker
 		if (marker) {
 			map.removeLayer(marker);
 		}
 
-		// Add new marker
 		this.mapInstance.marker = L.marker([location.lat, location.lng]).addTo(map);
 	}
 

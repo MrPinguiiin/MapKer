@@ -4,24 +4,10 @@
 	let selectedLocation1 = $state<{ lat: number; lng: number } | null>(null);
 	let selectedLocation2 = $state<{ lat: number; lng: number } | null>(null);
 	let selectedLocation3 = $state<{ lat: number; lng: number } | null>(null);
+	let selectedLocation4 = $state<{ lat: number; lng: number } | null>(null);
+	let selectedLocation5 = $state<{ lat: number; lng: number } | null>(null);
 
-	$effect(() => {
-		if (selectedLocation1) {
-			console.log('Map 1 - Selected location:', selectedLocation1);
-		}
-	});
 
-	$effect(() => {
-		if (selectedLocation2) {
-			console.log('Map 2 - Selected location:', selectedLocation2);
-		}
-	});
-
-	$effect(() => {
-		if (selectedLocation3) {
-			console.log('Map 3 - Selected location:', selectedLocation3);
-		}
-	});
 </script>
 
 <svelte:head>
@@ -70,7 +56,7 @@
 
 		<div class="map-demo">
 			<MapPicker
-				bind:selectedLocation={selectedLocation2}
+				bind:selectedLocation={selectedLocation5}
 				width="100%"
 				height="400px"
 				center={[40.7128, -74.0060]}
@@ -81,9 +67,9 @@
 			/>
 		</div>
 
-		{#if selectedLocation2}
+		{#if selectedLocation5}
 			<div class="result">
-				<strong>Selected Location:</strong> {selectedLocation2.lat.toFixed(6)}, {selectedLocation2.lng.toFixed(6)}
+				<strong>Selected Location:</strong> {selectedLocation5.lat.toFixed(6)}, {selectedLocation5.lng.toFixed(6)}
 			</div>
 		{/if}
 	</section>
@@ -127,6 +113,25 @@
 				showCoordinates={true}
 				enableSearch={false}
 				showEmbedCode={true}
+			/>
+		</div>
+	</section>
+
+	<section class="demo-section">
+		<h2>📍 With Location Info Card</h2>
+		<p>This example shows a Google Maps-style info card with location details and action buttons.</p>
+
+		<div class="map-demo">
+			<MapPicker
+				bind:selectedLocation={selectedLocation4}
+				width="100%"
+				height="400px"
+				center={[40.7128, -74.0060]}
+				zoom={12}
+				enableSearch={true}
+				placeholder="Search for New York landmarks..."
+				showCoordinates={true}
+				showLocationInfo={true}
 			/>
 		</div>
 	</section>
