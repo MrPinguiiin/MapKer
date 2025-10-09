@@ -112,6 +112,25 @@
 		{/if}
 	</section>
 
+	<section class="demo-section">
+		<h2>🔗 With Embed Code Generation</h2>
+		<p>This example shows how to generate embed code for the selected location using OpenStreetMap.</p>
+
+		<div class="map-demo">
+			<MapPicker
+				bind:selectedLocation={selectedLocation1}
+				width="100%"
+				height="400px"
+				center={[-6.2, 106.816666]}
+				zoom={13}
+				placeholder="Click on the map to select a location"
+				showCoordinates={true}
+				enableSearch={false}
+				showEmbedCode={true}
+			/>
+		</div>
+	</section>
+
 	<section class="features">
 		<h2>✨ Features</h2>
 		<div class="feature-grid">

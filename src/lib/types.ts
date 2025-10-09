@@ -12,6 +12,7 @@ export interface MapPickerProps {
 	placeholder?: string;
 	showCoordinates?: boolean;
 	enableSearch?: boolean;
+	showEmbedCode?: boolean;
 }
 
 export interface MapInstance {
