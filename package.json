@@ -1,6 +1,14 @@
 {
 	"name": "mapker",
 	"version": "0.0.1",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/MrPinguiiin/MapKer"
+	},
+	"homepage": "https://github.com/MrPinguiiin/MapKer#readme",
+	"bugs": {
+		"url": "https://github.com/MrPinguiiin/MapKer/issues"
+	},
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build && npm run prepack",

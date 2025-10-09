@@ -45,17 +45,11 @@ npm install leaflet-geosearch
 <script lang="ts">
   import { MapPicker } from 'mapker';
 
-  let selectedLocation = null;
-
-  function handleLocationSelected(event) {
-    const { lat, lng } = event.detail;
-    console.log('Selected location:', lat, lng);
-  }
+  let selectedLocation: { lat: number; lng: number } | null = null;
 </script>
 
 <MapPicker
   bind:selectedLocation
-  on:locationSelected={handleLocationSelected}
   width="100%"
   height="400px"
   center={[-6.2, 106.816666]}  <!-- Jakarta coordinates -->
@@ -80,9 +74,7 @@ npm install leaflet-geosearch
 
 ### Events
 
-| Event | Detail | Description |
-|-------|--------|-------------|
-| `locationSelected` | `{ lat: number; lng: number }` | Fired when a location is selected |
+The component uses two-way binding with `bind:selectedLocation`. No custom events needed!
 
 ### Styling
 
@@ -110,7 +102,7 @@ The component includes default styles but can be customized by overriding the CS
 <script lang="ts">
   import { MapPicker } from 'mapker';
 
-  let selectedLocation = null;
+  let selectedLocation: { lat: number; lng: number } | null = null;
 </script>
 
 <MapPicker
@@ -139,12 +131,14 @@ The component includes default styles but can be customized by overriding the CS
 <script lang="ts">
   import { MapPicker } from 'mapker';
 
-  let selectedLocation = null;
+  let selectedLocation: { lat: number; lng: number } | null = null;
 
-  $: if (selectedLocation) {
-    console.log('New location selected:', selectedLocation);
-    // Save to database, update form, etc.
-  }
+  $effect(() => {
+    if (selectedLocation) {
+      console.log('New location selected:', selectedLocation);
+      // Save to database, update form, etc.
+    }
+  });
 </script>
 
 <MapPicker bind:selectedLocation />
@@ -157,14 +151,10 @@ The component includes default styles but can be customized by overriding the CS
   import { MapPicker } from 'mapker';
 
   let formData = {
-    location: null,
+    location: null as { lat: number; lng: number } | null,
     address: '',
     notes: ''
   };
-
-  function handleLocationSelected(event) {
-    formData.location = event.detail;
-  }
 
   async function submitForm() {
     if (!formData.location) {
@@ -187,7 +177,6 @@ The component includes default styles but can be customized by overriding the CS
     <label>Location:</label>
     <MapPicker
       bind:selectedLocation={formData.location}
-      on:locationSelected={handleLocationSelected}
       showCoordinates={true}
     />
   </div>
@@ -205,8 +194,8 @@ The component includes default styles but can be customized by overriding the CS
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/mapker.git
-cd mapker
+git clone https://github.com/MrPinguiiin/MapKer.git
+cd MapKer
 
 # Install dependencies
 bun install
@@ -246,7 +235,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 If you have any questions or need help, please:
 
-- Open an issue on [GitHub](https://github.com/yourusername/mapker/issues)
+- Open an issue on [GitHub](https://github.com/MrPinguiiin/MapKer/issues)
 - Join our community discussions
 
 ---

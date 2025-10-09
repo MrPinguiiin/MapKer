@@ -6,10 +6,24 @@
 	let selectedLocation2: { lat: number; lng: number } | null = null;
 	let selectedLocation3: { lat: number; lng: number } | null = null;
 
-	function handleLocationSelected(event: CustomEvent, mapNumber: number) {
-		const { lat, lng } = event.detail;
-		console.log(`Map ${mapNumber} - Selected location:`, lat, lng);
-	}
+	// Reactive statements to handle location changes
+	$effect(() => {
+		if (selectedLocation1) {
+			console.log('Map 1 - Selected location:', selectedLocation1);
+		}
+	});
+
+	$effect(() => {
+		if (selectedLocation2) {
+			console.log('Map 2 - Selected location:', selectedLocation2);
+		}
+	});
+
+	$effect(() => {
+		if (selectedLocation3) {
+			console.log('Map 3 - Selected location:', selectedLocation3);
+		}
+	});
 </script>
 
 <svelte:head>
@@ -156,7 +170,7 @@
 	</section>
 
 	<footer class="footer">
-		<p>Made with ❤️ using OpenStreetMap and Leaflet. <a href="https://github.com/yourusername/mapker">View on GitHub</a></p>
+		<p>Made with ❤️ using OpenStreetMap and Leaflet. <a href="https://github.com/MrPinguiiin/MapKer">View on GitHub</a></p>
 	</footer>
 </div>
 
