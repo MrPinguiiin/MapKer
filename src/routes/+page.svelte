@@ -1,12 +1,10 @@
 <script lang="ts">
 	import { MapPicker } from '$lib/index.js';
 
-	// State untuk lokasi yang dipilih
-	let selectedLocation1: { lat: number; lng: number } | null = null;
-	let selectedLocation2: { lat: number; lng: number } | null = null;
-	let selectedLocation3: { lat: number; lng: number } | null = null;
+	let selectedLocation1 = $state<{ lat: number; lng: number } | null>(null);
+	let selectedLocation2 = $state<{ lat: number; lng: number } | null>(null);
+	let selectedLocation3 = $state<{ lat: number; lng: number } | null>(null);
 
-	// Reactive statements to handle location changes
 	$effect(() => {
 		if (selectedLocation1) {
 			console.log('Map 1 - Selected location:', selectedLocation1);
